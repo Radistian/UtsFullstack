@@ -11,7 +11,7 @@ export class Uts extends BaseEntity{
     id : number
 
     @Column()
-    title:string
+    nama:string
 
     @Column({unique:true})
     email:string
@@ -30,4 +30,10 @@ export class Uts extends BaseEntity{
 
     @Column()
     alamat:string
+
+    @Column({type: 'datetime', default : () => 'CURRENT_TIMESTAMP'})
+    updated_at: Date
+
+    @Column({type: 'datetime', default : () => 'CURRENT_TIMESTAMP'})
+    created_at: Date
 }

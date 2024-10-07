@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsInt } from "class-validator";
+import { IsNotEmpty, IsOptional, IsInt, IsEmail, Length, IsDate } from "class-validator";
 import { Type } from "class-transformer";
 import { OmitType } from "@nestjs/mapped-types";
 
@@ -9,22 +9,27 @@ export class UtsDto{
     @IsOptional()
     id:number
 
-    @IsNotEmpty()
+    @IsNotEmpty({message : "Nama tidak boleh kosong"})
     nama:string
 
     @IsNotEmpty()
+    @IsEmail({}, {message:'Format email salah, harap masukkan email yang valid'})
     email:string
 
-    @IsNotEmpty()
+    @IsNotEmpty({message : 'Tempat lahir tidak boleh kosong'})
     tempat_lahir:string
 
-    @IsInt()
-    tanggal_lahir:number
+    @IsNotEmpty()
+    @IsDate({message:"Format Tanggal Lahir salah"})
+    // @IsInt()
+    tanggal_lahir:Date
 
     @IsNotEmpty()
+    @Length(10,10,{message:"NISN harus terdiri dari 10 karakter"})
     nisn:string
 
     @IsNotEmpty()
+    @Length(16,16,{message:"NIK harus terdiri dari 16 karakter"})
     nik:string
 
     @IsNotEmpty()
@@ -70,3 +75,4 @@ export class FindAllDto{
 }
 
 export class CreateDto extends OmitType(UtsDto, ['id']){}
+export class UpdateDto extends UtsDto{}

@@ -28,13 +28,7 @@ class BaseResponse {
     }
   }
 
-  _sukses(message:string, data?:any):ResponseUts{
-    return{
-      status : "Success",
-      message : message,
-      data : data || []
-    }
-  }
+
 
   _paginationUts(
     message:string,data:any,total:number,page:number,pageSize:number
@@ -49,7 +43,7 @@ class BaseResponse {
         total : total,
         nextPage : page + 1,
         pageSize : pageSize,
-        previosPage : page - 1
+        previosPage : page - 1 == 0? page:page-1
       }
     }
   }

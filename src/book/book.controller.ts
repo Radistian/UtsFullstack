@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { BookService } from './book.service';
 import { query } from 'express';
 import { BookDto, CreateBookDto, FindBookDto, UpdateBookDto } from './book.dto';
 import { Pagination } from 'src/utils/decorator/pagination.decorator';
+import { JwtGuard } from 'src/app/auth/auth.guard';
 
 @Controller('book')
 export class BookController {
@@ -12,7 +13,7 @@ export class BookController {
     async update(@Body()payload:UpdateBookDto, @Param('id')id:string){
         return this.bookService.update(+id, payload)
     }
-
+    @UseGuards(JwtGuard)
     @Get('list')
     async findAllBook(@Pagination()query:FindBookDto){
         return this.bookService.findAllBook(query)

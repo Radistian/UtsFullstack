@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BookModule } from './book/book.module';
 import { UtsModule } from './uts/uts.module';
+import { AuthModule } from './app/auth/auth.module';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { UtsModule } from './uts/uts.module';
         return typeOrmConfig
       }
     }),
-    LatihanModule, Latihan2Module, BookModule, UtsModule
+    LatihanModule, Latihan2Module, BookModule, UtsModule, AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
